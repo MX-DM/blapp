@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MONGODBTEST_URI: ${{ secrets.MONGODBTEST_URI }}
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      SECRET: ${{ secrets.SECRET }}
+      PORT: ${{ secrets.PORT }}
       NODE_ENV: test
 
     steps:
