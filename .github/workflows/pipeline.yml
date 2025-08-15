@@ -12,6 +12,10 @@ jobs:
 
   deployment_pipeline:
     runs-on: ubuntu-latest
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI_TEST }}
+      NODE_ENV: test
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
