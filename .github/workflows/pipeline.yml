@@ -13,7 +13,7 @@ jobs:
   deployment_pipeline:
     runs-on: ubuntu-latest
     env:
-      MONGODB_URI: ${{ secrets.MONGODB_URI_TEST }}
+      MONGODBTEST_URI: ${{ secrets.MONGODBTEST_URI }}
       NODE_ENV: test
 
     steps:
