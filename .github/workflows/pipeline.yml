@@ -56,31 +56,33 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
-      - name: Notify Discord on success
-        if: ${{ success() && github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
-        uses: sarisia/actions-status-discord@v1.15.3
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          status: Success
-          content: "A new version of Pokedex deployed to https://full-stack-open-pokedex-wuoz.onrender.com by ${{ github.actor }}"
-          title: "New Deployment"
-          url: "https://full-stack-open-pokedex-wuoz.onrender.com"
+  # Discord notifying ready to use. Need to add a webhook url
+  
+      #- name: Notify Discord on success
+      #  if: ${{ success() && github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
+      #  uses: sarisia/actions-status-discord@v1.15.3
+      #  with:
+      #    webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      #    status: Success
+      #    content: "A new version of Pokedex deployed to https://full-stack-open-pokedex-wuoz.onrender.com by ${{ github.actor }}"
+      #    title: "New Deployment"
+      #    url: "https://full-stack-open-pokedex-wuoz.onrender.com"
 
-  notify_failure:
-    needs: [deployment_pipeline]
-    if: failure()
-    runs-on: ubuntu-latest
-    steps:
-      - uses: sarisia/actions-status-discord@v1.15.3
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          status: Failure
-          content: "|
-            Build failed for commit ${{ github.sha }} by ${{ github.actor }}.
-            Commit message: ${{ github.event.head_commit.message }}
-            Link: https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
-          title: "Deployment failed"
-          url: "https://full-stack-open-pokedex-wuoz.onrender.com"
+ # notify_failure:
+  #  needs: [deployment_pipeline]
+  #  if: failure()
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - uses: sarisia/actions-status-discord@v1.15.3
+  #      with:
+  #        webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+  #        status: Failure
+  #        content: "|
+  #          Build failed for commit ${{ github.sha }} by ${{ github.actor }}.
+  #          Commit message: ${{ github.event.head_commit.message }}
+  #          Link: https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
+  #        title: "Deployment failed"
+  #        url: "https://full-stack-open-pokedex-wuoz.onrender.com"
       
   tag_release:
     needs: [deployment_pipeline]
