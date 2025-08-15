@@ -16,8 +16,8 @@ jobs:
       MONGODBTEST_URI: ${{ secrets.MONGODBTEST_URI }}
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
       SECRET: ${{ secrets.SECRET }}
-      PORT: ${{ secrets.PORT }}
       NODE_ENV: test
+      PORT: ${{ secrets.PORT }}
 
     steps:
       - uses: actions/checkout@v4
